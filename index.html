@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="chromeMathsApp">
 	<head>
 		<link rel="stylesheet" href="./css/bootstrap.css" />
+		<link rel="stylesheet" href="./css/angular-csp.css" />
 	</head>
- 	<body>
+ 	<body ng-controller="mainController">
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="navbar-header">
 				<a class="navbar-brand">
-					Chrome Maths
+					{{ ApplicationTitle }}
 				</a>
 			</div>
 		</nav>
 		<script type="text/javascript" src="./js/jquery.js"></script>
 		<script type="text/javascript" src="./js/bootstrap.js"></script>
+		<script type="text/javascript" src="./js/angular.js"></script>
+		<script type="text/javascript" src="./js/chrome-maths.js"></script>
 	</body>
 </html>
