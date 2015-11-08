@@ -1,1 +1,22 @@
-This is the Greatest Common Divisor Page
+
+<div class="container">
+	This is the Greatest Common Divisor Page
+	<form class="form-inline">
+		<div class="form-group">
+			<label for="n1">n1</label>
+			<input type="number" ng-model="n1" />
+		</div>
+		<div class="form-group">
+			<label for="n2">n2</label>
+			<input type="number" ng-model="n2" />
+		</div>
+		<button class="btn btn-primary" ng-click="calculate()">
+			Calculate
+		</button>
+	</form>
+</div>
+<div class="container" ng-show="isResultVisible">
+	<div class="jumbotron">
+		{{ resultText }}
+	</div>
+</div>
