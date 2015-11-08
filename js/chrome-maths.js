@@ -20,21 +20,6 @@ var controller = app.controller("mainController", ["$scope", function ($scope) {
 	$scope.ApplicationTitle = "Chrome Maths";
 }]);
 
-function gcd(n1, n2) {
-	if (n2 > n1) {
-		var temp = n1;
-		n1 = n2;
-		n2 = temp;
-	}
-	if (n2 === 0) {
-		return n1;
-	} else if (n2 === 1) {
-		return 1;
-	} else {
-		return gcd(n2, n1 % n2);
-	}
-}
-
 app.controller('gcdController', ['$scope', function ($scope) {
 	$scope.n1 = 0;
 	$scope.n2 = 0;
