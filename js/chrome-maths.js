@@ -10,14 +10,33 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 	$routeProvider.when('/gcd',
 		{
 			templateUrl: 'templates/gcd.html',
-			controller: 'gcdController'
+			controller: 'gcdController',
+			matches: function (path) {
+				return path === 'gcd';
+			}
 		})
-		.otherwise({ templateUrl: 'templates/main.html' });
+		.when('/eulerTotient',
+			{
+				templateUrl: 'templates/eulerTotient.html',
+				matches: function (path) {
+					return path === 'eulerTotient';
+				}
+			})
+		.otherwise({
+			templateUrl: 'templates/main.html',
+			matches: function() {
+				return false;
+			}
+		});
 	$locationProvider.html5Mode(true);
 }]);
 
 var controller = app.controller("mainController", ["$scope", function ($scope) {
 	$scope.ApplicationTitle = "Chrome Maths";
+}]);
+
+app.controller('navPanelController', ["$scope", "$route", function ($scope, $route) {
+	$scope.$route = $route;
 }]);
 
 app.controller('gcdController', ['$scope', function ($scope) {
