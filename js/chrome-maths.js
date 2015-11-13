@@ -24,14 +24,38 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 			})
 		.otherwise({
 			templateUrl: 'templates/main.html',
-			matches: function() {
+			matches: function () {
 				return false;
 			}
 		});
 	$locationProvider.html5Mode(true);
 }]);
 
-var controller = app.controller("mainController", ["$scope", function ($scope) {
+app.factory("routePersister", ["$rootScope", function ($rootScope) {
+	return {
+		watch: function () {
+			$rootScope.$on("$routeChangeStart", function (event, next, current) {
+				//do your validations here
+				if (next.$$route) {
+					console.log("$rootScope.$on('$routeChangeStart') next.$$route.originalPath = " + next.$$route.originalPath);
+				} else {
+					console.log("$rootScope.$on('$routeChangeStart') next.$$route is undefined");
+				}
+			});
+		},
+		getStartingRoute: function () {
+			return "/gcd";
+		}
+	};
+}]);
+
+app.run(["$location", "$route", "routePersister", function ($location, $route, routePersister) {
+	console.log("Inside app.run()");
+	$location.path(routePersister.getStartingRoute());
+	$route.reload();
+	routePersister.watch();
+}]);
+var controller = app.controller("mainController", ["$scope", "$rootScope", function ($scope, $rootScope) {
 	$scope.ApplicationTitle = "Chrome Maths";
 }]);
 
