@@ -36,7 +36,7 @@ app.factory("routePersister", ["$rootScope", function ($rootScope) {
 		watch: function () {
 			$rootScope.$on("$routeChangeStart", function (event, next, current) {
 				//do your validations here
-				var routeToStore = undefined;
+				var routeToStore = "";
 				if (next.$$route) {
 					console.log("$rootScope.$on('$routeChangeStart') next.$$route.originalPath = " + next.$$route.originalPath);
 					routeToStore = next.$$route.originalPath;
@@ -82,9 +82,22 @@ app.controller('gcdController', ['$scope', function ($scope) {
 	$scope.n2 = 0;
 	$scope.isResultVisible = false;
 	$scope.resultText = "";
+	$scope.steps = [];
+	
+	chrome.storage.sync.get('gcdController', function(o) {
+		if(o.gcdController) {
+			$scope.n1 = o.gcdController.n1;
+			$scope.n2 = o.gcdController.n2;	
+		};
+	});
+	
 	$scope.calculate = function () {
-		var result = gcd($scope.n1, $scope.n2);
-		$scope.resultText = 'gcd(' + $scope.n1 + ', ' + $scope.n2 + ') = ' + result;
-		$scope.isResultVisible = true;
+		if($scope.n1 && $scope.n2) {
+			$scope.steps = [];
+			var result = gcd($scope.n1, $scope.n2, function(s) { $scope.steps.push(s); });
+			$scope.resultText = 'gcd(' + $scope.n1 + ', ' + $scope.n2 + ') = ' + result;
+			$scope.isResultVisible = true;
+			chrome.storage.sync.set({'gcdController' : { n1: $scope.n1, n2: $scope.n2}});
+		}
 	};
 }]);

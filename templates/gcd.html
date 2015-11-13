@@ -1,4 +1,3 @@
-
 <div class="container">
 	This is the Greatest Common Divisor Page
 	<form class="form-inline">
@@ -18,5 +17,10 @@
 <div class="container" ng-show="isResultVisible">
 	<div class="jumbotron">
 		{{ resultText }}
+	</div>
+	<div class="list-group">
+		<div class="list-group-item" ng-repeat="debugStep in steps">
+			{{ debugStep }}
+		</div>
 	</div>
 </div>
