@@ -106,7 +106,7 @@ app.controller('gcdController', ['$scope', function ($scope) {
 
 app.controller('eulerTotientController', ['$scope', function ($scope) {
 	$scope.n = 0;
-	$scope.isResultVisible = false
+	$scope.isResultVisible = false;
 
 	chrome.storage.sync.get('eulerTotientController', function (o) {
 		var values = o['eulerTotientController'];
