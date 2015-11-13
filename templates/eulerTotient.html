@@ -1,5 +1,17 @@
 <div class="container">
-	<div class="jumbotron">
-		<h1>Euler Totient</h1>
+	<h1>Euler Totient</h1>
+	<div class="container">
+		<div class="form-inline">
+			<div class="form-group">
+				<label for="n">n</label>
+				<input type="numeber" id="n" ng-model="n" />
+			</div>
+			<button class="btn btn-primary" ng-click="calculate()">
+				Calculate
+			</button>
+		</div>
+	</div>
+	<div class="container" ng-show="isResultVisible">
+		{{ resultText }}
 	</div>
 </div>

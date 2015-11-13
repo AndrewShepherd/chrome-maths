@@ -18,6 +18,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 		.when('/eulerTotient',
 			{
 				templateUrl: 'templates/eulerTotient.html',
+				controller: 'eulerTotientController',
 				matches: function (path) {
 					return path === 'eulerTotient';
 				}
@@ -83,21 +84,30 @@ app.controller('gcdController', ['$scope', function ($scope) {
 	$scope.isResultVisible = false;
 	$scope.resultText = "";
 	$scope.steps = [];
-	
-	chrome.storage.sync.get('gcdController', function(o) {
-		if(o.gcdController) {
+
+	chrome.storage.sync.get('gcdController', function (o) {
+		if (o.gcdController) {
 			$scope.n1 = o.gcdController.n1;
-			$scope.n2 = o.gcdController.n2;	
+			$scope.n2 = o.gcdController.n2;
 		};
 	});
-	
+
 	$scope.calculate = function () {
-		if($scope.n1 && $scope.n2) {
+		if ($scope.n1 && $scope.n2) {
 			$scope.steps = [];
-			var result = gcd($scope.n1, $scope.n2, function(s) { $scope.steps.push(s); });
+			var result = gcd($scope.n1, $scope.n2, function (s) { $scope.steps.push(s); });
 			$scope.resultText = 'gcd(' + $scope.n1 + ', ' + $scope.n2 + ') = ' + result;
 			$scope.isResultVisible = true;
-			chrome.storage.sync.set({'gcdController' : { n1: $scope.n1, n2: $scope.n2}});
+			chrome.storage.sync.set({ 'gcdController': { n1: $scope.n1, n2: $scope.n2 } });
 		}
+	};
+}]);
+
+app.controller('eulerTotientController', ['$scope', function ($scope) {
+	$scope.n = 0;
+	$scope.isResultVisible = false;
+	$scope.calculate = function () {
+		$scope.resultText = 'euler totient of ' + $scope.n + ' = ' + eulerTotient($scope.n);
+		$scope.isResultVisible = true;
 	};
 }]);
