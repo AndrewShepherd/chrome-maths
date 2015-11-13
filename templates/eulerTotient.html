@@ -11,7 +11,16 @@
 			</button>
 		</div>
 	</div>
-	<div class="container" ng-show="isResultVisible">
-		{{ resultText }}
+	<div class="container" ng-show="isResultVisible" style="margin-top:12px">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				{{ resultText }}
+			</div>
+			<div class="list-group">
+				<div class="list-group-item" ng-repeat="step in steps">
+					{{ step }}
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

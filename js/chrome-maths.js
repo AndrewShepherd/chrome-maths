@@ -107,7 +107,8 @@ app.controller('eulerTotientController', ['$scope', function ($scope) {
 	$scope.n = 0;
 	$scope.isResultVisible = false;
 	$scope.calculate = function () {
-		$scope.resultText = 'euler totient of ' + $scope.n + ' = ' + eulerTotient($scope.n);
+		$scope.steps = [];
+		$scope.resultText = 'euler totient of ' + $scope.n + ' = ' + eulerTotient($scope.n, function(s) { $scope.steps.push(s); });
 		$scope.isResultVisible = true;
 	};
 }]);
