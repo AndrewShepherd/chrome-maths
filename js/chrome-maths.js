@@ -87,6 +87,7 @@ app.controller('gcdController', ['$scope', function ($scope) {
 
 	chrome.storage.sync.get('gcdController', function (o) {
 		if (o.gcdController) {
+			console.log('gcdController - reading from persistent storage');
 			$scope.n1 = o.gcdController.n1;
 			$scope.n2 = o.gcdController.n2;
 		};
@@ -105,10 +106,19 @@ app.controller('gcdController', ['$scope', function ($scope) {
 
 app.controller('eulerTotientController', ['$scope', function ($scope) {
 	$scope.n = 0;
-	$scope.isResultVisible = false;
+	$scope.isResultVisible = false
+
+	chrome.storage.sync.get('eulerTotientController', function (o) {
+		var values = o['eulerTotientController'];
+		if (values) {
+			$scope.n = values.n;
+		}
+	});
+
 	$scope.calculate = function () {
 		$scope.steps = [];
-		$scope.resultText = 'euler totient of ' + $scope.n + ' = ' + eulerTotient($scope.n, function(s) { $scope.steps.push(s); });
+		$scope.resultText = 'euler totient of ' + $scope.n + ' = ' + eulerTotient($scope.n, function (s) { $scope.steps.push(s); });
 		$scope.isResultVisible = true;
+		chrome.storage.sync.set({ 'eulerTotientController': { n: $scope.n } });
 	};
 }]);
