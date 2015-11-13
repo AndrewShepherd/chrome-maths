@@ -36,25 +36,39 @@ app.factory("routePersister", ["$rootScope", function ($rootScope) {
 		watch: function () {
 			$rootScope.$on("$routeChangeStart", function (event, next, current) {
 				//do your validations here
+				var routeToStore = undefined;
 				if (next.$$route) {
 					console.log("$rootScope.$on('$routeChangeStart') next.$$route.originalPath = " + next.$$route.originalPath);
+					routeToStore = next.$$route.originalPath;
 				} else {
 					console.log("$rootScope.$on('$routeChangeStart') next.$$route is undefined");
 				}
+				chrome.storage.sync.set({ 'route': routeToStore });
 			});
 		},
-		getStartingRoute: function () {
-			return "/gcd";
+		getStartingRoute: function (callback) {
+			chrome.storage.sync.get('route', function (o) {
+				if (o.route) {
+					callback(o.route);
+				} else {
+					callback();
+				}
+			});
 		}
 	};
 }]);
 
 app.run(["$location", "$route", "routePersister", function ($location, $route, routePersister) {
 	console.log("Inside app.run()");
-	$location.path(routePersister.getStartingRoute());
+	routePersister.getStartingRoute(function (r) {
+		if (r) {
+			$location.path(r);
+		}
+	});
 	$route.reload();
 	routePersister.watch();
 }]);
+
 var controller = app.controller("mainController", ["$scope", "$rootScope", function ($scope, $rootScope) {
 	$scope.ApplicationTitle = "Chrome Maths";
 }]);
