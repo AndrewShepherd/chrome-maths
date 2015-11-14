@@ -1,3 +1,19 @@
 <div class="container">
 	<h1>{{ templateTitle }}</h1>
+
+	<div class="row">
+		<ul class="list-group col-md-3 col-sm-6 col-xs-6">
+			<li class="list-group-item" ng-repeat="pair in pairs">
+				<button style="float:right" class="btn btn-warning btn-xs" ng-click="remove(pair)">
+					<span class="glyphicon glyphicon-minus"></span>
+				</button>
+				x =
+				<input ng-model="pair.m" style="width:25px" /> (MOD
+				<input ng-model="pair.c" style="width:25px" />)
+			</li>
+			<li class="list-group-item">
+				<button class="btn btn-default btn-xs" ng-click="addPair()"><span class="glyphicon glyphicon-plus"></span></button>
+			</li>
+		</ul>
+	</div>
 </div>
