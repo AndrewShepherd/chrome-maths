@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html ng-app="chromeMathsApp">
-	<head>
-		<link rel="stylesheet" href="./css/bootstrap.css" />
-		<link rel="stylesheet" href="./css/bootstrap-theme.css" />
-		<link rel="stylesheet" href="./css/angular-csp.css" />
-	</head>
- 	<body ng-controller="mainController">
-		<nav ng-controller="navPanelController" class="navbar navbar-default navbar-static-top">
-			<div class="navbar-header">
-				<button class="navbar-toggle collapsed" data-target="#toggleTarget" data-toggle="collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="main" class="navbar-brand">
+
+<head>
+	<link rel="stylesheet" href="./css/bootstrap.css" />
+	<link rel="stylesheet" href="./css/bootstrap-theme.css" />
+	<link rel="stylesheet" href="./css/angular-csp.css" />
+</head>
+
+<body ng-controller="mainController">
+	<nav ng-controller="navPanelController" class="navbar navbar-default navbar-static-top">
+		<div class="navbar-header">
+			<button class="navbar-toggle collapsed" data-target="#toggleTarget" data-toggle="collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="main" class="navbar-brand">
 					{{ ApplicationTitle }}
 				</a>
-			</div>
-			<div id="toggleTarget" class="navbar-collapse collapse">
-				<ul class="navbar-nav nav">
-					<li ng-class="{active: $route.current.matches('gcd')}"><a href="gcd">Greatest Common Divisor</a></li>
-					<li ng-class="{active: $route.current.matches('eulerTotient')}"><a href="eulerTotient">Euler Totient</a></li>
-				</ul>
-				
-			</div>
-		</nav>
-		<div ng-view></div>
-		<script type="text/javascript" src="./js/jquery.js"></script>
-		<script type="text/javascript" src="./js/bootstrap.js"></script>
-		<script type="text/javascript" src="./js/angular.js"></script>
-		<script type="text/javascript" src="./js/angular-route.js"></script>
-		<script type="text/javascript" src="./js/gcd.js"></script>
-		<script type="text/javascript" src="./js/eulerTotient.js"></script>
-		<script type="text/javascript" src="./js/chrome-maths.js"></script>
-	</body>
+		</div>
+		<div id="toggleTarget" class="navbar-collapse collapse">
+			<ul class="navbar-nav nav">
+				<li ng-class="{active: $route.current.matches('gcd')}"><a href="gcd">Greatest Common Divisor</a></li>
+				<li ng-class="{active: $route.current.matches('eulerTotient')}"><a href="eulerTotient">Euler Totient</a></li>
+				<li ng-class="{active: $route.current.matches('chineseRemainder')}"><a href="chineseRemainder">Chinese Remainder</a></li>
+			</ul>
+
+		</div>
+	</nav>
+	<div ng-view></div>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.js"></script>
+	<script type="text/javascript" src="./js/angular.js"></script>
+	<script type="text/javascript" src="./js/angular-route.js"></script>
+	<script type="text/javascript" src="./js/gcd.js"></script>
+	<script type="text/javascript" src="./js/eulerTotient.js"></script>
+	<script type="text/javascript" src="./js/chrome-maths.js"></script>
+</body>
+
 </html>

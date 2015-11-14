@@ -23,6 +23,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 					return path === 'eulerTotient';
 				}
 			})
+		.when('/chineseRemainder',
+			{
+				templateUrl: 'templates/chineseRemainder.html',
+				controller: 'chineseRemainderController',
+				matches: function (path) {
+					return path === 'chineseRemainder';
+				}
+			})
 		.otherwise({
 			templateUrl: 'templates/main.html',
 			matches: function () {
@@ -121,4 +129,8 @@ app.controller('eulerTotientController', ['$scope', function ($scope) {
 		$scope.isResultVisible = true;
 		chrome.storage.sync.set({ 'eulerTotientController': { n: $scope.n } });
 	};
+}]);
+
+app.controller('chineseRemainderController', ['$scope', function ($scope) {
+	$scope.templateTitle = 'Chinese Remainder';
 }]);
