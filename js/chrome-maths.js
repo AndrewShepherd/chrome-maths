@@ -134,6 +134,10 @@ app.controller('eulerTotientController', ['$scope', function ($scope) {
 app.controller('chineseRemainderController', ['$scope', '$timeout', function ($scope, $timeout) {
 	$scope.templateTitle = 'Chinese Remainder';
 
+	$scope.persistState = function () {
+		chrome.storage.sync.set({ 'chineseRemainderController': { pairs: $scope.pairs } });
+	};
+
 	var generateId = (function () {
 		var seed = 1;
 		return function () {
@@ -141,6 +145,16 @@ app.controller('chineseRemainderController', ['$scope', '$timeout', function ($s
 		};
 	})();
 	$scope.pairs = [];
+	chrome.storage.sync.get('chineseRemainderController', function (o) {
+		var values = o['chineseRemainderController'];
+		if (values) {
+			$scope.pairs = values.pairs || [];
+			$scope.pairs.forEach(function (pair) {
+				pair.mId = generateId();
+			});
+		}
+
+	});
 	$scope.addPair = function () {
 		var id = generateId();
 		$scope.pairs.push({
@@ -151,10 +165,12 @@ app.controller('chineseRemainderController', ['$scope', '$timeout', function ($s
 		$timeout(function () {
 			$(document.getElementById(id)).select().focus();
 		});
+		$scope.persistState();
 	}
 	$scope.remove = function (pair) {
 		console.log("Remove pair");
 		var index = $scope.pairs.indexOf(pair);
 		$scope.pairs.splice(index, 1);
+		$scope.persistState();
 	}
 }]);
