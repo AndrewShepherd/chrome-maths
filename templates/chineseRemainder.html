@@ -7,13 +7,30 @@
 				<button style="float:right" class="btn btn-warning btn-xs" ng-click="remove(pair)">
 					<span class="glyphicon glyphicon-minus"></span>
 				</button>
-				x =
-				<input id='{{ pair.mId }}' ' ng-model="pair.m" ng-change="persistState()" style="width:25px" /> (MOD
+				x &equiv;
+				<input id='{{ pair.mId }}' ng-model="pair.m" ng-change="persistState()" style="width:25px" /> (MOD
 				<input ng-model="pair.c" style="width:25px" ng-change="persistState()" />)
 			</li>
 			<li class="list-group-item">
 				<button class="btn btn-default btn-xs" ng-click="addPair()"><span class="glyphicon glyphicon-plus"></span></button>
 			</li>
 		</ul>
+		<div class="col-md-3 col-sm-6 col-xs-6">
+			<button ng-click="calculate()" class="btn btn-primary">
+				Calculate
+			</button>
+		</div>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			{{ result }}
+		</div>
+		<div class="panel-body">
+			<div class="list-group">
+				<div class="list-group-item" ng-repeat="step in steps">
+					{{ step }}
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

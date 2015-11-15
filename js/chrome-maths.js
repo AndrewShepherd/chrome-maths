@@ -173,4 +173,12 @@ app.controller('chineseRemainderController', ['$scope', '$timeout', function ($s
 		$scope.pairs.splice(index, 1);
 		$scope.persistState();
 	}
+
+	$scope.steps = [];
+	$scope.result = '';
+	$scope.calculate = function () {
+		$scope.steps = [];
+		var resultPair = chineseRemainder($scope.pairs, function (s) { $scope.steps.push(s); });
+		$scope.result = 'x = ' + resultPair.c + '( MOD  ' + resultPair.m + ')';
+	};
 }]);
