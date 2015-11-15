@@ -134,12 +134,23 @@ app.controller('eulerTotientController', ['$scope', function ($scope) {
 app.controller('chineseRemainderController', ['$scope', function ($scope) {
 	$scope.templateTitle = 'Chinese Remainder';
 
+	var generateId = (function () {
+		var seed = 1;
+		return function () {
+			return 'crc_' + (++seed);
+		};
+	})();
 	$scope.pairs = [];
 	$scope.addPair = function () {
+		var id = generateId();
 		$scope.pairs.push({
+			mId: id,
 			m: 0,
 			c: 1
 		});
+		window.setTimeout(function () {
+			$(document.getElementById(id)).select().focus();
+		}, 100);
 	}
 	$scope.remove = function (pair) {
 		console.log("Remove pair");
