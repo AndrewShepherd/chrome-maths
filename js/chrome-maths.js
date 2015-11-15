@@ -131,7 +131,7 @@ app.controller('eulerTotientController', ['$scope', function ($scope) {
 	};
 }]);
 
-app.controller('chineseRemainderController', ['$scope', function ($scope) {
+app.controller('chineseRemainderController', ['$scope', '$timeout', function ($scope, $timeout) {
 	$scope.templateTitle = 'Chinese Remainder';
 
 	var generateId = (function () {
@@ -148,9 +148,9 @@ app.controller('chineseRemainderController', ['$scope', function ($scope) {
 			m: 0,
 			c: 1
 		});
-		window.setTimeout(function () {
+		$timeout(function () {
 			$(document.getElementById(id)).select().focus();
-		}, 100);
+		});
 	}
 	$scope.remove = function (pair) {
 		console.log("Remove pair");
